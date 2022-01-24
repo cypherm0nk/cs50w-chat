@@ -1,0 +1,62 @@
+body {
+  padding-top: 5rem;
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  word-wrap: anywhere;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container h3 {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.container h3.right {
+  float: right;
+  margin-left: 20px;
+  margin-right: 0;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
+
+.delete-button {
+  float: right;
+}
+#chat_list {
+  overflow-y: scroll;
+  height: 400px;
+}

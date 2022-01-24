@@ -1,0 +1,81 @@
+{% extends "base_layout.html" %}
+{% block title %}
+Flack Chat
+{% endblock %}
+{% block content %}
+<div class="content">
+    {%if name: %}
+    <div class="jumbotron">
+        <h4>Channel: #{{name}}</h4>
+        <button class="btn btn-success btn-sm delete-button" id="btn_join_channel" type="submit"
+            style="visibility: hidden;">Join
+            Channel</button>
+        <button class="btn btn-danger btn-sm delete-button" id="btn_exit_channel" type="submit">Exit Channel</button>
+    </div>
+    <div class="jumbotron">
+        <div id="chat_list">
+            {%if messages %}
+            {%for message in messages %}
+            {%if message.username==username%}
+            <div class="container" id="id_{{ message.id }}">
+                <button type="button" class="close delete-button" aria-label="Close" data-id="{{ message.id }}"
+                    id="btn_delete_message_{{ message.id }}">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3>{{ message.username }}</h3>
+                {%if message.type.name=="IMAGE"%}
+                <a href="{{ message.text }}" target="_blank" download="{{message.filename}}">
+                    <img class="img-fluid img-thumbnail" src="{{ message.text }}" width="250px"
+                        alt="{{message.filename}}">
+                </a><br>
+                <p class="text-center text-break">{{ message.filename }}</p>
+                {%elif message.type.name=="OTHER"%}
+                <a href="{{ message.text }}" target="_blank" download="{{message.filename}}">
+                    <img class="img-fluid img-thumbnail" src="{{url_for('static',filename='attach-file.png')}}"
+                        width="250px" alt="{{message.filename}}">
+                </a><br>
+                <p class="text-center text-break">{{ message.filename }}</p>
+                {%else%}
+                <p class="text-left text-break">{{ message.text }}</p>
+                {%endif %}
+                <span class="time-right">{{ message.timestamp }}</span>
+            </div>
+            {%else%}
+            <div class="container darker">
+                <h3 class="right">{{ message.username }}</h3>
+                {%if message.type.name=="IMAGE"%}
+                <a href="{{ message.text }}" target="_blank" download="{{message.filename}}">
+                    <img class="img-fluid img-thumbnail" src="{{ message.text }}" width="250px"
+                        alt="{{message.filename}}">
+                </a><br>
+                <p class="text-center text-break">{{ message.filename }}</p>
+                {%elif message.type.name=="OTHER"%}
+                <a href="{{ message.text }}" target="_blank" download="{{message.filename}}">
+                    <img class="img-fluid img-thumbnail" src="{{url_for('static',filename='attach-file.png')}}"
+                        width="250px" alt="{{message.filename}}">
+                </a><br>
+                <p class="text-center text-break">{{ message.filename }}</p>
+                {%else%}
+                <p class="text-left">{{ message.text }}</p>
+                {%endif %}
+                <span class="time-left">{{ message.timestamp }}</span>
+            </div>
+            {%endif %}
+            {%endfor %}
+            {%endif %}
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="txMessage" placeholder="Type something and hit enter to send">
+        </div>
+        <div class="form-group">
+            <input type="file" accept="*" class="form-control-file" id="file_upload">
+        </div>
+    </div>
+    {%endif%}
+</div>
+<script>
+    var current_channel = "{{name}}";
+    var file_icon="{{url_for('static',filename='attach-file.png')}}"
+</script>
+<script type="text/javascript" src="{{url_for('static',filename='chat.js')}}"></script>
+{% endblock %}

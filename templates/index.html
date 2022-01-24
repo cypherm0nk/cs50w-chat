@@ -1,0 +1,15 @@
+{% extends "base_layout.html" %}
+
+{% block title %}
+JP CHAT
+{% endblock %}
+
+{% block content %}
+<script>
+    if (current_username!="") {
+        if (last_channel !="" && last_channel!=null) {
+            window.location.replace('/channel/' + last_channel);
+        }
+    }
+</script>
+{% endblock %}

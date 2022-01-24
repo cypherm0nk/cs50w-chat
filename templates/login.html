@@ -1,0 +1,30 @@
+{% extends "base_layout.html" %}
+{% block title %}
+LOGIN:
+{% endblock %}
+
+{% block content %}
+<script>
+    if (current_username == "") {
+        if (last_channel != "") {
+            localStorage.removeItem('last_channel');
+        }
+    }
+</script>
+<div class="jumbotron">
+    <form action="/login" method="POST" class="needs-validation" novalidate>
+        <div class="form-group">
+            <label for="textUsername">Username</label>
+            <input type="text" class="form-control" name="username" id="textUsername"
+                pattern="^[a-zA-Z0-9_]{5,}[a-zA-Z0-9_]*$" required>
+            <div class="invalid-feedback">
+                <p> Please provide a username following the following rules:</p>
+                <p> 1-Must be at least 5 characters</p>
+                <p>2-Can not have spaces or special characters</p>
+                <p>3- May contain underscore</p>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success my-1">Login</button>
+    </form>
+</div>
+{% endblock %}
